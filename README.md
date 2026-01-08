@@ -4,11 +4,11 @@ A high-performance, award-winning Single Page Application for Global Fitness, bu
 
 ## 🎨 Theme: "The Global Renaissance"
 
-A fusion of raw street fitness, mental philosophy, and digital elegance.
+A fusion of raw street fitness, mental philosophy, and digital elegance. This is not just a fitness website—it's a movement for the global human renaissance.
 
 ### Color Palette
-- **Obsidian Black** (#0a0a0a) - Primary background
-- **Renaissance Yellow** (#FFE600) - Accent color for buttons and highlights
+- **Obsidian Black** (#0a0a0a) - Primary background representing the "All Inclusive" darkness
+- **Renaissance Yellow** (#FFE600) - The Sun/Intelligence accent color for CTAs and highlights
 
 ## 🚀 Getting Started
 
@@ -66,19 +66,19 @@ import heroImage from './assets/hero-beach.jpg'
 <div style={{ backgroundImage: `url('${heroImage}')` }} />
 ```
 
-## 🔗 Configure External Links
+## 🔗 Pre-Configured Links
 
-Update these URLs in `src/App.jsx`:
+All social and contact links are already configured in `src/App.jsx`:
 
-1. **WhatsApp Number** (Line ~20)
-   ```jsx
-   const whatsappLink = "https://wa.me/YOUR_NUMBER?text=10%20Toes%20In"
-   ```
+✅ **WhatsApp Group**: https://chat.whatsapp.com/G9c94IRyVID5c6mpkBA8Gw
+✅ **Personal Sessions**: +353 83 080 1276
+✅ **Instagram**: @jasonckennedy
+✅ **Facebook**: jason.kennedy.12720
 
-2. **Calendly Link** (Line ~21)
-   ```jsx
-   const calendlyLink = "https://calendly.com/your-link"
-   ```
+**To Update Calendly** (Line ~44):
+```jsx
+const calendlyLink = "https://calendly.com/your-link"
+```
 
 ## ✨ Features
 
@@ -91,18 +91,37 @@ Update these URLs in `src/App.jsx`:
 - **Pulsing CTA Button** with glow effect
 
 ### Sections
-1. **Hero** - Full-screen immersive introduction
-2. **The Trinity** - Bento grid layout (Body, Mind, Spirit)
-3. **The Guide** - Jason Kennedy introduction
-4. **Live Training Schedule** - Mission control style booking
-5. **The Manifesto** - Community showcase
-6. **Footer** - Conversion-focused with WhatsApp CTA
+1. **Header Navigation** - Prominent Global Fitness logo with social links (Instagram, Facebook, WhatsApp)
+2. **Hero** - Full-screen immersive introduction with Ken Burns effect and emotional messaging
+3. **The Trinity** - Bento grid (Body, Mind, Spirit) with powerful, persuasive copy
+4. **The Guide** - Jason Kennedy's story and the global human renaissance vision
+5. **Mental Nutritionist** - Philosophy section explaining mental nutrition and fertile soil concept
+6. **What You Get** - 4 key benefits (Free consultation, Assessment, Equipment, Support)
+7. **Testimonials Carousel** - 5 rotating student reviews categorized by Mind/Body/Spirit
+8. **Live Training Schedule** - Mission control booking interface with dual CTAs
+9. **FAQ Section** - 6 questions about training, 10 Toes In mentality, and logistics
+10. **The Manifesto** - "Stop Waiting, Start Building" rallying cry
+11. **Footer** - Dual conversion CTAs (WhatsApp Group + Personal Sessions) with social links
 
-### Components
-- Floating mobile navigation
-- Calendar booking modal
-- Privacy policy modal
-- 1dollarwebsite.online branding badge
+### Interactive Components
+- **Fixed Header** - Scroll-triggered background with logo and social links
+- **Testimonials Carousel** - Auto-rotating (6s) with manual navigation and category badges
+- **FAQ Accordion** - Smooth expand/collapse animations with 6 questions
+- **Floating Mobile Navigation** - Bottom dock with Home, About, WhatsApp icons
+- **Calendar Booking Modal** - Popup for Calendly integration
+- **Privacy Policy Modal** - Legal information display
+- **1dollarwebsite.online Badge** - Branding credit in footer
+
+## 📝 Copywriting Philosophy
+
+All copy has been enhanced to be **persuasive, emotional, and action-oriented**:
+
+- **Hero**: Focuses on escape from noise and personal renaissance
+- **Trinity**: Emphasizes functional strength, mental sovereignty, and stillness as rebellion
+- **Mental Nutritionist**: Introduces the concept of mental nutrition and fertile soil
+- **Testimonials**: Real-feeling stories highlighting Mind/Body/Spirit transformations
+- **FAQ**: Addresses the "10 Toes In" philosophy and common logistical questions
+- **Manifesto**: Powerful "Stop Waiting, Start Building" message
 
 ## 🎯 Customization Tips
 
