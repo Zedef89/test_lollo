@@ -99,14 +99,16 @@ const calendlyLink = "https://calendly.com/your-link"
 6. **What You Get** - 4 key benefits (Free consultation, Assessment, Equipment, Support)
 7. **Testimonials Carousel** - 5 rotating student reviews categorized by Mind/Body/Spirit
 8. **Live Training Schedule** - Mission control booking interface with dual CTAs
-9. **FAQ Section** - 6 questions about training, 10 Toes In mentality, and logistics
-10. **The Manifesto** - "Stop Waiting, Start Building" rallying cry
-11. **Footer** - Dual conversion CTAs (WhatsApp Group + Personal Sessions) with social links
+9. **FAQ Section** - 6 questions about training, 10 Toes In mentality, and logistics (with neon effects)
+10. **Contact Form** - Full-featured contact form with validation and neon effects
+11. **The Manifesto** - "Stop Waiting, Start Building" rallying cry
+12. **Footer** - Dual conversion CTAs (WhatsApp Group + Personal Sessions) with social links
 
 ### Interactive Components
 - **Fixed Header** - Scroll-triggered background with logo and social links
 - **Testimonials Carousel** - Auto-rotating (6s) with manual navigation and category badges
-- **FAQ Accordion** - Smooth expand/collapse animations with 6 questions
+- **FAQ Accordion** - Smooth expand/collapse animations with 6 questions and neon effects
+- **Contact Form** - Full validation, neon focus effects, loading states, success/error messages
 - **Floating Mobile Navigation** - Bottom dock with Home, About, WhatsApp icons
 - **Calendar Booking Modal** - Popup for Calendly integration
 - **Privacy Policy Modal** - Legal information display
@@ -121,7 +123,47 @@ All copy has been enhanced to be **persuasive, emotional, and action-oriented**:
 - **Mental Nutritionist**: Introduces the concept of mental nutrition and fertile soil
 - **Testimonials**: Real-feeling stories highlighting Mind/Body/Spirit transformations
 - **FAQ**: Addresses the "10 Toes In" philosophy and common logistical questions
+- **Contact Form**: 24-hour response promise with multiple contact options
 - **Manifesto**: Powerful "Stop Waiting, Start Building" message
+
+## 📧 Contact Form Configuration
+
+The contact form is fully functional with client-side validation. To enable form submissions:
+
+**Option 1: Formspree (Easiest)**
+```jsx
+// In src/App.jsx, line ~170, replace with:
+const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(formData)
+})
+```
+
+**Option 2: EmailJS**
+```jsx
+// Install: npm install @emailjs/browser
+// Then use EmailJS send method
+```
+
+**Option 3: Custom Backend**
+```jsx
+// Point to your own API endpoint
+const response = await fetch('YOUR_API_ENDPOINT', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(formData)
+})
+```
+
+**Features:**
+- Name, Email, Phone (optional), Message fields
+- Client-side validation (required fields, email format)
+- Neon glow effects on focus
+- Loading spinner during submission
+- Success/error message display
+- Form reset after successful submission
+- Alternative WhatsApp contact link
 
 ## 🎯 Customization Tips
 
