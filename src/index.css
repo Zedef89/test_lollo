@@ -22,10 +22,68 @@
   }
 
   .noise-bg {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulance type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
   }
 
   .glassmorphism {
     @apply backdrop-blur-md bg-white/5 border border-white/10;
+  }
+
+  .neon-border {
+    position: relative;
+    border: 2px solid rgba(255, 230, 0, 0.3);
+    box-shadow:
+      0 0 10px rgba(255, 230, 0, 0.2),
+      0 0 20px rgba(255, 230, 0, 0.1),
+      inset 0 0 10px rgba(255, 230, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .neon-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg,
+      rgba(255, 230, 0, 0.1),
+      rgba(255, 230, 0, 0.3),
+      rgba(255, 230, 0, 0.1));
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    filter: blur(10px);
+  }
+
+  .neon-border:hover {
+    border-color: rgba(255, 230, 0, 0.6);
+    box-shadow:
+      0 0 20px rgba(255, 230, 0, 0.4),
+      0 0 40px rgba(255, 230, 0, 0.2),
+      0 0 60px rgba(255, 230, 0, 0.1),
+      inset 0 0 20px rgba(255, 230, 0, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .neon-border:hover::before {
+    opacity: 1;
+  }
+
+  .neon-glow-pulse {
+    animation: neonPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes neonPulse {
+    0%, 100% {
+      box-shadow:
+        0 0 10px rgba(255, 230, 0, 0.2),
+        0 0 20px rgba(255, 230, 0, 0.1),
+        inset 0 0 10px rgba(255, 230, 0, 0.05);
+    }
+    50% {
+      box-shadow:
+        0 0 20px rgba(255, 230, 0, 0.3),
+        0 0 30px rgba(255, 230, 0, 0.15),
+        inset 0 0 15px rgba(255, 230, 0, 0.08);
+    }
   }
 }
