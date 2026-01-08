@@ -816,20 +816,23 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="glassmorphism rounded-2xl overflow-hidden border border-white/5 hover:border-renaissance/30 transition-all"
+                whileHover={{ scale: 1.01 }}
+                className="glassmorphism rounded-2xl overflow-hidden neon-border relative backdrop-blur-xl bg-obsidian/40"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                  className="w-full px-6 py-5 flex items-center justify-between text-left group"
+                  className="w-full px-6 py-5 flex items-center justify-between text-left group relative z-10"
                 >
-                  <span className="font-heading text-lg md:text-xl font-bold group-hover:text-renaissance transition-colors">
+                  <span className="font-heading text-lg md:text-xl font-bold group-hover:text-renaissance transition-colors duration-300">
                     {faq.question}
                   </span>
-                  <ChevronDown
-                    className={`w-6 h-6 text-renaissance transition-transform ${
-                      openFaq === index ? 'rotate-180' : ''
-                    }`}
-                  />
+                  <motion.div
+                    animate={{ rotate: openFaq === index ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex-shrink-0 ml-4"
+                  >
+                    <ChevronDown className="w-6 h-6 text-renaissance drop-shadow-[0_0_8px_rgba(255,230,0,0.5)]" />
+                  </motion.div>
                 </button>
 
                 <AnimatePresence>
@@ -839,10 +842,10 @@ function App() {
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="overflow-hidden"
+                      className="overflow-hidden relative z-10"
                     >
-                      <div className="px-6 pb-5 text-gray-300 leading-relaxed">
-                        {faq.answer}
+                      <div className="px-6 pb-5 text-gray-300 leading-relaxed border-t border-renaissance/10">
+                        <div className="pt-4">{faq.answer}</div>
                       </div>
                     </motion.div>
                   )}
