@@ -25,7 +25,9 @@ import {
   MapPin,
   Quote,
   ChevronDown,
-  Sparkles
+  Sparkles,
+  Send,
+  Mail
 } from 'lucide-react'
 
 function App() {
@@ -35,6 +37,16 @@ function App() {
   const [openFaq, setOpenFaq] = useState(null)
   const { scrollYProgress } = useScroll()
   const [scrolled, setScrolled] = useState(false)
+
+  // Contact Form State
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+  })
+  const [formStatus, setFormStatus] = useState({ type: '', message: '' })
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   // Social & Contact Links
   const whatsappGroupLink = "https://chat.whatsapp.com/G9c94IRyVID5c6mpkBA8Gw"
@@ -126,6 +138,59 @@ function App() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Handle form input changes
+  const handleFormChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  // Handle form submission
+  const handleFormSubmit = async (e) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setFormStatus({ type: '', message: '' })
+
+    // Basic validation
+    if (!formData.name || !formData.email || !formData.message) {
+      setFormStatus({ type: 'error', message: 'Please fill in all required fields.' })
+      setIsSubmitting(false)
+      return
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(formData.email)) {
+      setFormStatus({ type: 'error', message: 'Please enter a valid email address.' })
+      setIsSubmitting(false)
+      return
+    }
+
+    try {
+      // TODO: Replace with your actual form submission endpoint
+      // Example: await fetch('YOUR_FORM_ENDPOINT', { method: 'POST', body: JSON.stringify(formData) })
+
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500))
+
+      setFormStatus({
+        type: 'success',
+        message: 'Message sent! We\'ll get back to you within 24 hours. 10 Toes In!'
+      })
+
+      // Reset form
+      setFormData({ name: '', email: '', phone: '', message: '' })
+    } catch (error) {
+      setFormStatus({
+        type: 'error',
+        message: 'Something went wrong. Please try again or contact us via WhatsApp.'
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   return (
     <div className="relative min-h-screen overflow-x-hidden">
@@ -873,6 +938,169 @@ function App() {
               Message Jason directly on WhatsApp
             </a>
           </motion.div>
+        </div>
+      </section>
+
+      {/* CONTACT FORM SECTION */}
+      <section className="relative py-24 px-6 bg-obsidian">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="font-heading text-5xl md:text-7xl font-bold mb-4 text-gradient">
+              GET IN TOUCH
+            </h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+              Ready to start your transformation? Send us a message and we'll respond within 24 hours.
+            </p>
+          </motion.div>
+
+          <motion.form
+            onSubmit={handleFormSubmit}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="glassmorphism rounded-3xl p-8 md:p-12 neon-border relative backdrop-blur-xl bg-obsidian/40"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              {/* Name Field */}
+              <div>
+                <label htmlFor="name" className="block text-sm font-semibold text-gray-300 mb-2">
+                  Name <span className="text-renaissance">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleFormChange}
+                  required
+                  className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-renaissance focus:ring-2 focus:ring-renaissance/20 transition-all"
+                  placeholder="Your full name"
+                />
+              </div>
+
+              {/* Email Field */}
+              <div>
+                <label htmlFor="email" className="block text-sm font-semibold text-gray-300 mb-2">
+                  Email <span className="text-renaissance">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleFormChange}
+                  required
+                  className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-renaissance focus:ring-2 focus:ring-renaissance/20 transition-all"
+                  placeholder="your@email.com"
+                />
+              </div>
+            </div>
+
+            {/* Phone Field */}
+            <div className="mb-6">
+              <label htmlFor="phone" className="block text-sm font-semibold text-gray-300 mb-2">
+                Phone (Optional)
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleFormChange}
+                className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-renaissance focus:ring-2 focus:ring-renaissance/20 transition-all"
+                placeholder="+353 XX XXX XXXX"
+              />
+            </div>
+
+            {/* Message Field */}
+            <div className="mb-6">
+              <label htmlFor="message" className="block text-sm font-semibold text-gray-300 mb-2">
+                Message <span className="text-renaissance">*</span>
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleFormChange}
+                required
+                rows="6"
+                className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-renaissance focus:ring-2 focus:ring-renaissance/20 transition-all resize-none"
+                placeholder="Tell us about your fitness goals, questions, or how we can help..."
+              />
+            </div>
+
+            {/* Status Message */}
+            <AnimatePresence>
+              {formStatus.message && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className={`mb-6 p-4 rounded-xl flex items-center gap-3 ${
+                    formStatus.type === 'success'
+                      ? 'bg-green-500/10 border border-green-500/30 text-green-400'
+                      : 'bg-red-500/10 border border-red-500/30 text-red-400'
+                  }`}
+                >
+                  {formStatus.type === 'success' ? (
+                    <Check className="w-5 h-5 flex-shrink-0" />
+                  ) : (
+                    <X className="w-5 h-5 flex-shrink-0" />
+                  )}
+                  <p className="text-sm">{formStatus.message}</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Submit Button */}
+            <motion.button
+              type="submit"
+              disabled={isSubmitting}
+              whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+              whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+              className={`w-full py-4 rounded-full font-bold text-lg flex items-center justify-center gap-3 transition-all ${
+                isSubmitting
+                  ? 'bg-gray-600 cursor-not-allowed'
+                  : 'bg-renaissance text-obsidian shadow-yellow-glow hover:shadow-yellow-glow-lg'
+              }`}
+            >
+              {isSubmitting ? (
+                <>
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                    className="w-5 h-5 border-2 border-obsidian border-t-transparent rounded-full"
+                  />
+                  Sending...
+                </>
+              ) : (
+                <>
+                  <Send className="w-5 h-5" />
+                  Send Message
+                </>
+              )}
+            </motion.button>
+
+            {/* Alternative Contact */}
+            <p className="text-center text-gray-500 text-sm mt-6">
+              Prefer WhatsApp?{' '}
+              <a
+                href={whatsappPersonalLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-renaissance hover:underline font-semibold"
+              >
+                Message us directly
+              </a>
+            </p>
+          </motion.form>
         </div>
       </section>
 
